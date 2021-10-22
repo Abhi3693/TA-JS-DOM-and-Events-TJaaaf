@@ -75,6 +75,7 @@ h1 {
   align-items: center;
   width: 100%;
   height: 100%;
+  color: a;
 }
 .box {
   border: 4px solid firebrick;
