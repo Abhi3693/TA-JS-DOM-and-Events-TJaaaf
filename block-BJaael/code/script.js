@@ -1,59 +1,37 @@
-let div = document.querySelector(".container");
-
-console.log(div);
-console.dir(div);
-
-for(let i = 0; i < 500; i++) {
-
-    let box = document.createElement("div");
-    box.classList.add("box");
-
-    function generateRandomColor(){
-        let hexChar = [
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "0",
-            "A",
-            "B",
-            "C",
-            "D",
-            "E",
-            "F"
-        ]
-
-        let color = "#";
-
-        for(let i = 0; i < 6; i++){
-            let randomNumber = Math.floor(Math.random() * 16);
-            color = color + hexChar[randomNumber];
-        }
-        return color;
-    }
-
-
-    function generate500number(){
-        let randomNumber = Math.floor(Math.random() * 500)
-        return randomNumber;
-    }
-
-    function handleMouseMove(){
-        let randomColor = generateRandomColor();
-        box.style.backgroundColor = randomColor;
-
-        let random500 = generate500number()
-        box.innerText = random500;
-    }
-
-
-    div.addEventListener("mousemove", handleMouseMove);
-    
-
-    div.append(box);
+function generateRandomNumber(max){
+    return Math.floor(Math.random() * max)
 }
+
+function generateRandomColor(){
+    let hexChar = ["1","2","3","4","5","6","7","8","9","0","A","B","C","D","E","F"];
+
+    let color = "#";
+    for(let i = 0; i < 6; i++){
+        let randomNumber = generateRandomNumber(16);
+        color = color + hexChar[randomNumber];
+    }
+    return color;
+}
+
+let parentBox = document.querySelector(".container");
+
+for (let i = 0; i < 500; i++){
+    let div = document.createElement("div");
+    div.classList.add("box")
+    let h3 = document.createElement("h3");
+    h3.innerText = generateRandomNumber(500);
+
+    div.append(h3);
+    parentBox.append(div);
+}
+
+let allBoxes = parentBox.querySelectorAll(".box");
+
+function handleMouseMove(){
+    allBoxes.forEach((box) => {
+        box.querySelector("h3").innerText = generateRandomNumber(500);
+        box.style.backgroundColor = generateRandomColor()
+    })
+}
+
+parentBox.addEventListener("mousemove", handleMouseMove)
