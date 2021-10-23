@@ -46,6 +46,7 @@ body {
   padding: 2rem;
   margin: 0 auto;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .banner {
@@ -66,6 +67,9 @@ body {
 .wrapper {
   max-width: 50%;
   margin: 0 auto;
+  display: inline;
+  flex-wrap: wrap;
+  
 }
 
 .boxes {
@@ -75,6 +79,7 @@ body {
   background-color: chocolate;
   color: #444;
   padding: 20px 0;
+  margin-top: 20px;
 }
 
 .wrapper:first-child {
