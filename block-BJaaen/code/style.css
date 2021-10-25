@@ -1,0 +1,38 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body{
+    max-width: 31%;
+    margin: 0 auto;   
+}
+.fa{
+    display: inline-block;
+    font-size: xxx-large;
+    margin-left: 50px;
+    margin-bottom: 30px;
+}
+
+h1{
+    background-color: aqua;
+    padding: 20px;
+    font-size: 40px;
+}
+
+h2{
+    font-size: 30px;
+}
+
+p{
+    font-size: xx-large;
+}
+
+button{
+    display: block;
+    font-size: 30px;
+    border: none;
+    background-color: white;
+    color: black;
+}
