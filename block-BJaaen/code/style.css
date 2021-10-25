@@ -27,6 +27,8 @@ h2{
 
 p{
     font-size: xx-large;
+    color: green;
+    font-weight: 700;
 }
 
 button{
@@ -35,4 +37,17 @@ button{
     border: none;
     background-color: white;
     color: black;
+}
+.flex{
+    display: flex;
+    justify-content: space-between;
+}
+li{
+    list-style: none;
+}
+.user-icons{
+    display: flex;
+}
+.computer-icons{
+    display: flex;
 }
