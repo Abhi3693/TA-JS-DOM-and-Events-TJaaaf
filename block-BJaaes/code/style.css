@@ -35,3 +35,42 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+.form-control{
+  font-size: 16px;
+  margin-top: 30px;
+}
+form{
+  margin-left: 50px;
+}
+small{
+  color: orange;
+  font-size: 16px;
+  margin-left: 20px;
+}
+input{
+  padding: 6px;
+  width: 200px;
+  border: 1px solid lightgray;
+}
+input:hover{
+  border: 1px solid gray;
+}
+h1{
+  color: goldenrod;
+  margin-left: 50px;
+  margin-top: 50px;
+}
+.submit{
+  margin-top: 30px;
+  padding: 8px 30px;
+  font-size: 16px;
+  border: 1px solid lightgray;
+}
+
+.fail{
+  border: 1px solid red;
+}
+.success{
+  border: 1px solid green;
+}
