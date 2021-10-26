@@ -1,44 +1,54 @@
 let form = document.querySelector("form");
-let result = document.querySelector(".result");
-let close = document.querySelector(".close");
-
-let userInfo = [];
-
-let ul = document.createElement("ul");
-
-function model(){
-    
-    userInfo.forEach((obj) => {
-        let li = document.createElement("li");
-     
-        li.innerText = `${obj.key} : ${obj.value}`;
-        ul.append(li);
-    })
-    result.append(ul);
-    result.style.display = "inline-block";
-}
+let model = document.querySelector(".model_overlay");
+let model_close = document.querySelector(".model_close");
+let modelInfo = document.querySelector(".model_info")
+let userData = {};
 
 function handleSubmit(event){
     event.preventDefault();
+    
+    let element = event.target.elements;
 
-    userInfo.push({ key: "Hello", value: form.elements.text.value });
-    userInfo.push({ key: "Email", value: form.elements.email[0].value });
-    userInfo.push({ key: "You Love", value: form.elements.gender.value });
-    userInfo.push({ key: "Color", value: form.elements.color.value });
-    userInfo.push({ key: "Rating", value: form.elements.range.value });
-    userInfo.push({ key: "Book Genre", value: form.elements.drone.value });
+    userData.name = element.name.value;
+    userData.email = element.email.value;
+    userData.choice = element.choice.value;
+    userData.color = element.color.value;
+    userData.range = element.range.value;
+    userData.book = element.drone.value;
+    userData.terms = element.terms.checked;
+    
+    model.classList.add("open");
 
-    if(form.elements.terms.checked === true){
-        userInfo.push({ key: "Terms", value: "You agree to terms and condition" });
-    } else {
-        userInfo.push({ key: "Terms", value: "You do not agree to terms and condition" });
-    }
-    model();
+    let close = document.querySelector(".model_close");
+        close.addEventListener("click", () =>{
+        model.classList.remove("open")
+    })
+    displayInfo(userData)
 }
-
 form.addEventListener("submit", handleSubmit);
 
-function removewindow(){
-    result.style.display = "none";
+
+function displayInfo(){
+    modelInfo.innerHTML = "";
+    let h1 = document.createElement("h1");
+    h1.innerText = `Hello ${userData.name}`;
+    let email = document.createElement("p");
+    email.innerText = `Email : ${userData.email}`;
+    let choice = document.createElement("p");
+    choice.innerText = `Choice : ${userData.choice}`;
+    let color = document.createElement("p");
+    color.innerText = `Color : ${userData.color}`;
+    let range = document.createElement("p");
+    range.innerText = `Range : ${userData.range}`;
+    let book = document.createElement("p");
+    book.innerText = `Book : ${userData.book}`;
+    let terms = document.createElement("p");
+    terms.innerText = `${
+        userData.terms
+            ? "You have accepted the terms and condition"
+            : "You have not accepted the terms and condition" 
+    }`;
+
+    modelInfo.append(h1,email,choice,color,range,book,terms);
+    model.append(modelInfo);
 }
-close.addEventListener("click", removewindow);
