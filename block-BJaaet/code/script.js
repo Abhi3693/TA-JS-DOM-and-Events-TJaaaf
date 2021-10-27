@@ -1,33 +1,53 @@
-let form = document.querySelector("form");
+let input = document.querySelector(`input[type="text"]`);
+let rootElm = document.querySelector(".movie-list");
 
-function handleSubmit(event){
+let allMovies = [];
 
-    event.preventDefault();
-    let elm = event.target.elements.movie;
-    let checkBox = document.createElement('input')
-    let btn = document.createElement("button");
-    let ul = document.querySelector(".movie-holder");
-    let li = document.createElement("li");
-    let label = document.createElement("lable");
-
-    checkBox.setAttribute("type", "checkbox");
-    checkBox.setAttribute("id", `${elm.value}`);
-    checkBox.classList.add("checkbox");
+input.addEventListener("keyup", (event) => {
     
-    btn.setAttribute("type", "submit");
-    btn.classList.add("btn");
-    btn.innerText = "Close";
-    
-    ul.style.display = "inline-block";
-    label.setAttribute("for", `${elm.value}`);
+    if(event.keyCode === 13){
+        allMovies.push({name:event.target.value, watched: false});
+        event.target.value = "";
+    }
+    createMoviesUI();
+})
 
-    label.innerText = elm.value;
-    li.append(checkBox, label, btn);
-    ul.append(li);
+function deleteMovie(event){
+    let id = event.target.dataset.id;
+    allMovies.splice(id, 1);
+    createMoviesUI();
+}
 
-    btn.addEventListener("click", function(){
-        let parent = btn.parentElement;
-        parent.remove();
+function handleChange(event){
+    let id = event.target.id;
+    allMovies[id].watched = !allMovies[id].watched;
+}
+
+function createMoviesUI(){
+    rootElm.innerHTML = "";
+
+    allMovies.forEach((movie, i) => {
+
+        let li = document.createElement("li");
+        let input = document.createElement("input");
+        input.type = "checkbox";
+        input.classList.add("styled-checkbox");
+        input.id = i;
+        input.checked = movie.watched;
+        let label = document.createElement("label");
+        label.for = i;
+        label.innerText = movie.name;
+        let span = document.createElement("span");
+        span.innerText = "X";
+        span.setAttribute("data-id", i);
+
+        span.addEventListener("click", deleteMovie);
+
+        input.addEventListener("change", handleChange);
+
+        li.append(input,label,span);
+
+        rootElm.append(li);
     })
 }
-form.addEventListener("submit", handleSubmit)
+
