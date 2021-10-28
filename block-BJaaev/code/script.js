@@ -40,18 +40,18 @@ function renderTodoList(items) {
     items.forEach((todo, index) => {
         let li = document.createElement("li");
         let input = document.createElement("input");
-            input.classList.add("todoCheckbox");
-            input.type = "checkbox";
-            input.id = index;
-            input.checked = todo.isDone;
+        input.classList.add("todoCheckbox");
+        input.type = "checkbox";
+        input.id = index;
+        input.checked = todo.isDone;
         let label = document.createElement("label");
-            label.classList.add("todoLabel");
-            label.for = index;
-            label.innerText = todo.name;
+        label.classList.add("todoLabel");
+        label.for = index;
+        label.innerText = todo.name;
         let small = document.createElement("small");
-            small.innerText = "X";
-            small.setAttribute("data-id", index);
-            small.classList.add("close")
+        small.innerText = "X";
+        small.setAttribute("data-id", index);
+        small.classList.add("close")
 
         small.addEventListener("click", handleDeleteItem);
         input.addEventListener("change", handleChangeItemState)
@@ -59,56 +59,47 @@ function renderTodoList(items) {
 
         rootElm.append(li);
     });
-    
-    if (todoList.length) {
-        renderFilters()
-    }
 }
+
+// Event's
+
+let activeButton = "all";
 
 const handleActiveFilterClick = () => {
     renderTodoList(todoList.filter(item => !item.isDone));
+
+    activeButton = "active";
+    updateActiveButton();
 }
 
 const handleAllFilterClick = () => {
     renderTodoList(todoList);
+
+    activeButton = "all";
+    updateActiveButton();
 }
 
 const handleCompletedFilterClick = () => {
     renderTodoList(todoList.filter(item => item.isDone));
+
+    activeButton = "completed";
+    updateActiveButton();
 }
 
 const handleClearCompletedFilter = () => {
     updateTodoList(todoList.filter(item => !item.isDone));
+
+    activeButton = "clear";
+    updateActiveButton();
 }
 
-// Event's
-const clearFilters = () => {
-}
 
-const renderFilters = () => {
-    tallyElm.innerHTML = "";
 
-    let all = document.createElement("p");
-    all.innerText = "All";
 
-    let activeTodos = document.createElement("p");
-    activeTodos.innerText = "Active";
-    
-    const activeTodoItems = todoList.filter(item => !item.isDone);
-    let itemsLeft = document.createElement("p");
-    itemsLeft.innerText = `${activeTodoItems.length} items left`;
-
-    let completedTodos = document.createElement("p");
-    completedTodos.innerText = "Completed";
-
-    let clear = document.createElement("p");
-    clear.innerText = "Clear completed"
-
-    let div = document.createElement("div");
-    div.classList.add("center");
-    div.append(all, activeTodos, completedTodos)
-
-    tallyElm.append(itemsLeft, div, clear);
+let all = document.querySelector(".all");
+let activeTodos = document.querySelector(".active");
+let completedTodos = document.querySelector(".completed");
+let clear = document.querySelector(".clear");
 
     all.addEventListener("click", handleAllFilterClick);
 
@@ -117,139 +108,29 @@ const renderFilters = () => {
     completedTodos.addEventListener("click", handleCompletedFilterClick);
 
     clear.addEventListener("click", handleClearCompletedFilter);
-}
 
+
+
+const updateActiveButton = (btn = activeButton) => {
+
+    all.classList.remove("selected");
+    activeTodos.classList.remove("selected");
+    completedTodos.classList.remove("selected");
+    clear.classList.remove("selected");
+
+    if(btn === "all") {
+        all.classList.add("selected");
+    }
+    if(btn === "active") {
+        activeTodos.classList.add("selected");
+    }
+    if(btn === "completed") {
+        completedTodos.classList.add("selected");
+    }
+    if(btn === "clear") {
+        clear.classList.add("selected");
+    }
+}
+updateActiveButton();
 renderTodoList(todoList);
 
-
-// let input = document.querySelector("input");
-// let rootElm = document.querySelector("ul");
-// let tallyElm = document.querySelector(".tally-todo");
-
-
-// let todoList = JSON.parse(localStorage.getItem("todo")) || []; 
-// console.dir(todoList);
-
-// const updateTodoList = (item) => {
-//     localStorage.setItem("todo", JSON.stringify(item));
-//     todoList = item;
-//     renderList(todoList);
-// }
-
-// const handleInput = (event) => {
-//     let value = event.target.value;
-
-//     if(event.keyCode === 13) {
-//         todoList.push({ name: value, isDone: false });
-        
-//         updateTodoList(todoList);
-
-//         event.target.value = "";
-//     }
-
-    
-//     renderList(todoList);
-// }
-
-// const handleDeleteItem = (event) => {
-//     let itemIndex = event.target.dataset.id;
-//     let a = todoList.splice(itemIndex, 1);
-//     updateTodoList(todoList);
-// }
-
-// const handleChangeItem = (event) => {
-//     let id = event.target.id;
-//     todoList[id].isDone = !todoList[id].isDone;
-//     updateTodoList(todoList);
-// }
-
-// const renderList = (items) => {
-
-//     rootElm.innerHTML = "";
-
-//     items.forEach((todo, index) => {
-//         let li = document.createElement("li");
-//         let input = document.createElement("input");
-//             input.classList.add("todoCheckbox");
-//             input.type = "checkbox";
-//             input.id = index;
-//             input.checked = todo.isDone;
-//         let label = document.createElement("label");
-//             label.classList.add("todoLabel");
-//             label.for = index;
-//             label.innerText = todo.name;
-//         let small = document.createElement("small");
-//             small.innerText = "X";
-//             small.setAttribute("data-id", index);
-//             small.classList.add("close")
-
-//         small.addEventListener("click", handleDeleteItem);
-//         input.addEventListener("change", handleChangeItem)
-//         li.append(input, label, small);
-
-//         rootElm.append(li);
-//     })
-//     renderFilters();
-// }
-
-
-
-
-// input.addEventListener("keyup", handleInput);
-
-
-// const handleAllFilterClick = () => {
-//     renderList(todoList);
-// }
-
-// const handleActiveFilterClick = () => {
-//     renderList(todoList.filter((item) => !item.isDone));
-    
-// }
-
-// const handleCompletedFilterClick = () => {
-//     renderList(todoList.filter((item) => item.isDone));
-    
-// }
-
-// const handleClearCompletedFilter = () => {
-//     updateTodoList(todoList.filter((item) => !item.isDone));
-// }
-
-// const renderFilters = () => {
-//     tallyElm.innerHTML = "";
-
-//     let all = document.createElement("p");
-//     all.innerText = "All";
-
-//     let activeTodos = document.createElement("p");
-//     activeTodos.innerText = "Active";
-    
-//     const activeTodoItems = todoList.filter(item => !item.isDone);
-//     let itemsLeft = document.createElement("p");
-//     itemsLeft.innerText = `${activeTodoItems.length} items left`;
-
-//     let completedTodos = document.createElement("p");
-//     completedTodos.innerText = "Completed";
-
-//     let clear = document.createElement("p");
-//     clear.innerText = "Clear completed"
-
-//     let div = document.createElement("div");
-//     div.classList.add("center");
-//     div.append(all, activeTodos, completedTodos)
-
-//     tallyElm.append(itemsLeft, div, clear);
-
-//     all.addEventListener("click", handleAllFilterClick);
-
-//     activeTodos.addEventListener("click", handleActiveFilterClick);
-
-//     completedTodos.addEventListener("click", handleCompletedFilterClick);
-
-//     clear.addEventListener("click", handleClearCompletedFilter);
-
-// }
-
-
-// renderList(todoList);
