@@ -1,0 +1,45 @@
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+}
+
+section{
+    width: 50%;
+    margin: auto;
+    background-color: mistyrose;
+    height: 60vh;
+    padding: 20px;
+}
+li{
+    list-style: none;
+    margin-top: 10px;
+}
+h1{
+    font-size: 100px;
+    font-weight: 100;
+    color: grey;
+    margin: 20px 33%;
+}
+#todo{
+    width: 100%;
+    padding: 8px;
+    font-size: 20px;
+    border: 1px solid lightgray;
+}
+.close{
+    color: red;
+    font-size: 20px;
+    margin-left: 50%;
+}
+.todoLabel{
+    margin-left: 50px;
+}
+.tally-todo{
+    display: flex;
+    justify-content: space-between;  
+}
+
+.center{
+    display: contents;
+}
