@@ -1,0 +1,49 @@
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+}
+
+body{
+    background-color: rgb(252,244,231);
+   
+}
+section{
+    width: 50%;
+    margin: 100px auto;
+}
+.far{
+    margin-right: 50px;
+    font-size: 60px;
+}
+h1{
+    font-size: 40px;
+    background-color: rgb(24, 85, 85);
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+.list-holder{
+    padding: 0 50px;
+}
+h2{
+    margin-top: 50px;
+}
+.reset{
+    font-size: 50px;
+    margin: 50px 0 ;
+}
+ul{
+    list-style: none;
+    display: flex;
+}
+.selected-user{
+    color: blue;
+}
+.selected-computer{
+    color: red;
+}
+.result{
+    font-size: 30px;
+    font-weight: 800;
+}
