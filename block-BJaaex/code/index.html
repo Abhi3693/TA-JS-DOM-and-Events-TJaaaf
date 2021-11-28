@@ -3,24 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Menory Game</title>
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
-    <!-- Font Awesom -->
-    <script src="https://kit.fontawesome.com/5d86031b8f.js" crossorigin="anonymous"></script>
+    <title>GOT People</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container">
+    <header class="header">
       <h1>Memory Game</h1>
-      <button class="reset">Reset</button>
-      <p>Number of count : <small></small></p>
-      <p class="time">Timer : <small class="addTime"></small></p>
-      <section class="cardHolder">
-        <div id="card">
-        
-        </div>
-      </section>
-    </div>
-    
+    </header>
+    <main class="container">
+      <h2>Reset</h2>
+      <h2 class="count"></h2>
+      <small>Time: <small class="timer"></small></small>
+      <div class="cardHolder"></div>
+    </main>
+    <script src="./data.js"></script>
     <script src="./script.js"></script>
+  </body>
 </html>
